@@ -54,12 +54,12 @@ async function retryWithBackoff<T>(
 }
 
 export interface PersistenceQueue<TKey extends string, TData> {
-  enqueue: (key: TKey, data: TData) => void
-  flush: (key: TKey) => Promise<void>
-  flushAll: () => Promise<void>
-  waitForWrites: () => Promise<void>
-  hasPending: (key?: TKey) => boolean
-  dispose: () => Promise<void>
+  enqueue(key: TKey, data: TData): void
+  flush(key: TKey): Promise<void>
+  flushAll(): Promise<void>
+  waitForWrites(): Promise<void>
+  hasPending(key?: TKey): boolean
+  dispose(): Promise<void>
 }
 
 export function createPersistenceQueue<TKey extends string, TData>(
@@ -176,7 +176,7 @@ export function createPersistenceQueue<TKey extends string, TData>(
   }
 }
 
-const DEFAULT_QUEUE_OPTIONS: QueueOptions<unknown> = {
+const DEFAULT_QUEUE_OPTIONS = {
   debounceMs: 300,
   maxDelayMs: 2000,
   maxRetries: 3,
