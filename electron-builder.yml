@@ -62,5 +62,6 @@ publish:
   provider: github
   owner: manhere
   repo: pointer
+  releaseType: release
 electronDownload:
   mirror: https://npmmirror.com/mirrors/electron/
